@@ -1,10 +1,5 @@
 import os
 import time
-import mlrose_hiive
-
-
-# Press Shift+F10 to execute it or replace it with your code.
-# Press Double Shift to search everywhere for classes, files, tool windows, actions, and settings.
 
 class State:
     def __init__(self, state_name, tests, required_state):
@@ -23,25 +18,6 @@ class Transition:
 
 #
 # Returns the used transitions.
-def get_transitions_mlrose(states_to_visit, transitions):
-    state_list = []
-    dist_list = []
-    for transition in transitions:
-        if transition.from_state not in state_list:
-            state_list.append(transition.from_state)
-        if transition.to_state not in state_list:
-            state_list.append(transition.to_state)
-
-        dist_list.append(
-            (state_list.index(transition.from_state), state_list.index(transition.to_state), transition.weight))
-    fitness_dists = mlrose_hiive.TravellingSales(distances=dist_list)
-    problem_fit = mlrose_hiive.TSPOpt(length=len(states_to_visit), fitness_fn=fitness_dists,
-                                      maximize=False)
-    state, best_fitness, other = mlrose_hiive.genetic_alg(problem_fit)
-    return state.tolist()
-
-#
-# Returns the used transitions.
 def get_transitions(states_to_visit, transitions):
     resulting_transitions = []
     current_state = "START"
@@ -55,7 +31,7 @@ def get_transitions(states_to_visit, transitions):
                 break
 
         if not found_transition:
-            raise Exception(f"no transition found for {state_to_visit}")
+            raise Exception(f"no transition found for from {current_state} to {state_to_visit}")
     return resulting_transitions
 
 #

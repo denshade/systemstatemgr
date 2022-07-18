@@ -24,15 +24,15 @@ class TestStringMethods(unittest.TestCase):
     def test_plan_second_state_multiple(self):
         transition1 = Transition("START", "init", "script1.sh", 10)
         transition2 = Transition("START", "second", "script2.sh", 12)
-        transition3 = Transition("second", "init", "script1-2.sh", 2)
-        transitions = get_transitions({"init", "second"}, [transition1, transition2, transition3])
+        transition3 = Transition("init", "second", "script1-2.sh", 2)
+        transitions = get_transitions(["init", "second"], [transition1, transition2, transition3])
         first_transition = transitions[0]
         self.assertEqual(first_transition.from_state, "START")
-        self.assertEqual(first_transition.to_state, "second")
-        self.assertEqual(first_transition.script_to_run, "script2.sh")
+        self.assertEqual(first_transition.to_state, "init")
+        self.assertEqual(first_transition.script_to_run, "script1.sh")
         second_transition = transitions[1]
-        self.assertEqual(second_transition.from_state, "second")
-        self.assertEqual(second_transition.to_state, "init")
+        self.assertEqual(second_transition.from_state, "init")
+        self.assertEqual(second_transition.to_state, "second")
         self.assertEqual(second_transition.script_to_run, "script1-2.sh")
 
 
