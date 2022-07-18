@@ -1,5 +1,8 @@
 import os
+import random
 import time
+
+START = "START"
 
 
 class State:
@@ -19,12 +22,12 @@ class Transition:
 
 #
 # Returns the used transitions.
-def get_transitions(states_to_visit, transitions):
+def get_transitions_for_states(states_to_visit, available_transitions):
     resulting_transitions = []
-    current_state = "START"
+    current_state = START
     for state_to_visit in states_to_visit:
         found_transition = False
-        for transition in transitions:
+        for transition in available_transitions:
             if transition.from_state == current_state and transition.to_state == state_to_visit:
                 resulting_transitions.append(transition)
                 found_transition = True
@@ -35,7 +38,23 @@ def get_transitions(states_to_visit, transitions):
             raise Exception(f"no transition found for from {current_state} to {state_to_visit}")
     return resulting_transitions
 
+def try_random_transitions(states_to_visit, available_transitions, nr_tries):
+    best_try = None
+    best_transitions = None
+    for try_count in range(0,nr_tries):
+        try:
+            found_transitions = get_transitions_for_states(states_to_visit,  available_transitions)
+            score = sum(int(transition.weight) for transition in found_transitions)
+            if best_try is None or score < best_try:
+                best_try = score
+                best_transitions = found_transitions
+        except Exception:
+            # nothing.
+            pass
 
+        random.shuffle(states_to_visit)
+
+    return best_transitions
 #
 # run the transitions.
 def populate_transitions(transitions):
