@@ -51,6 +51,7 @@ def get_transitions(states_to_visit, transitions):
             if transition.from_state == current_state and transition.to_state == state_to_visit:
                 resulting_transitions.append(transition)
                 found_transition = True
+                current_state = state_to_visit
                 break
 
         if not found_transition:
