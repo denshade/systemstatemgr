@@ -1,6 +1,7 @@
 import os
 import time
 
+
 class State:
     def __init__(self, state_name, tests, required_state):
         self.state_name = state_name
@@ -33,6 +34,7 @@ def get_transitions(states_to_visit, transitions):
         if not found_transition:
             raise Exception(f"no transition found for from {current_state} to {state_to_visit}")
     return resulting_transitions
+
 
 #
 # run the transitions.

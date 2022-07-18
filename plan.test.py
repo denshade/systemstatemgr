@@ -2,7 +2,7 @@ import unittest
 from state import get_transitions
 from state import Transition, populate_transitions
 
-class TestStringMethods(unittest.TestCase):
+class TestPlanMethods(unittest.TestCase):
 
     def test_plan_not_empty_for_one_state(self):
         transition1 = Transition("START", "init", "script1.sh", 12)
