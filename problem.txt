@@ -8,3 +8,13 @@ Try to merge states?
 1 state per spec file. No combinations of state. State combinations are handled by the user.
 The problem of conflicting state is left for the user.
 
+_________________________________________________
+
+Spec file 1, file2, file 3: state 1
+Spec file 4: state 2
+
+Start -> state1, 12
+Start -> state2, 10
+state 1 -> state2, 3
+state 2 -> state1, 1
+
