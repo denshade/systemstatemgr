@@ -12,9 +12,10 @@ class State:
 
 
 class Transition:
-    def __init__(self, from_states, to_state, script_to_run):
+    def __init__(self, from_state, to_state, script_to_run, weight):
         self.script_to_run = script_to_run
-        self.from_states = from_states
+        self.from_state = from_state
+        self.weight = weight
         self.to_state = to_state
 
 #
@@ -29,14 +30,3 @@ def get_plan(expected_states_sequence, available_states, transitions):
 
     return picked_transitions
 
-
-def print_hi(name):
-    # Use a breakpoint in the code line below to debug your script.
-    print(f'Hi, {name}')  # Press Ctrl+F8 to toggle the breakpoint.
-
-
-# Press the green button in the gutter to run the script.
-if __name__ == '__main__':
-    print_hi('PyCharm')
-
-# See PyCharm help at https://www.jetbrains.com/help/pycharm/
