@@ -6,10 +6,9 @@ START = "START"
 
 
 class State:
-    def __init__(self, state_name, tests, required_state):
+    def __init__(self, state_name, tests):
         self.state_name = state_name
         self.tests = tests
-        self.required_state = required_state
 
 
 class Transition:
@@ -38,23 +37,26 @@ def get_transitions_for_states(states_to_visit, available_transitions):
             raise Exception(f"no transition found for from {current_state} to {state_to_visit}")
     return resulting_transitions
 
+
 def try_random_transitions(states_to_visit, available_transitions, nr_tries):
     best_try = None
     best_transitions = None
-    for try_count in range(0,nr_tries):
+    for try_count in range(0, nr_tries):
         try:
-            found_transitions = get_transitions_for_states(states_to_visit,  available_transitions)
+            found_transitions = get_transitions_for_states(list(map(lambda st: st.state_name, states_to_visit)),
+                                                           available_transitions)
             score = sum(int(transition.weight) for transition in found_transitions)
             if best_try is None or score < best_try:
                 best_try = score
                 best_transitions = found_transitions
-        except Exception:
-            # nothing.
-            pass
+        except Exception as exc:
+            print(f"{exc}")
 
         random.shuffle(states_to_visit)
 
     return best_transitions
+
+
 #
 # run the transitions.
 def populate_transitions(transitions):

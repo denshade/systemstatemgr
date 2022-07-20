@@ -7,6 +7,6 @@
   {
     "script_to_run" : "echo",
     "from_state": "start_datacore",
-    "to_state": "installed_dataset"
+    "to_state": "minimal_dataset"
   }
 ]

@@ -1,6 +1,6 @@
 import unittest
 from state import get_transitions_for_states
-from state import Transition, populate_transitions, START, try_random_transitions
+from state import Transition, populate_transitions, START, try_random_transitions, State
 
 
 class TestPlanMethods(unittest.TestCase):
@@ -37,7 +37,7 @@ class TestPlanMethods(unittest.TestCase):
         self.assertEqual(second_transition.script_to_run, "script1-2.sh")
 
     def test_random_tries(self):
-        states_list = list(range(0, 10))
+        states_list = list(map(lambda c: State(c, None), range(0, 10)))
         transitions = []
         for x in range(0, 10):
             transitions.append(Transition(START, x, None, x))

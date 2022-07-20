@@ -5,17 +5,18 @@ import sys
 
 def load_from_file(state_file, transitions_file):
     f = open(state_file)
+    print(f)
     states = json.load(f)
     resulting_states = []
     for json_state in states:
-        resulting_states.append(state.State(json_state.state_name, json_state.tests, json_state.required_states))
+        resulting_states.append(state.State(json_state["state_name"], json_state["tests"]))
     f = open(transitions_file)
     resulting_transitions = []
     transitions = json.load(f)
     for json_transition in transitions:
-        resulting_transitions.append(state.Transition(json_transition.from_state,
-                                                      json_transition.to_state,
-                                                      json_transition.script_to_run, 0))
+        resulting_transitions.append(state.Transition(json_transition["from_state"],
+                                                      json_transition["to_state"],
+                                                      json_transition["script_to_run"], 0))
     return resulting_states, resulting_transitions
 
 def run(states, transitions):
@@ -38,7 +39,8 @@ def load_and_run(state_file, transitions_file):
     run(resulting_states, sorted_transitions)
 
 if __name__ == '__main__':
-    print("Number of arguments:", len(sys.argv), "arguments")
-    print("Argument List:", str(sys.argv))
+    if len(sys.argv) < 3:
+        print("Usage: state_file.json transition_files.json")
+        sys.exit(2)
 
-    load_and_run(sys.argv[0], sys.argv[1])
+    load_and_run(sys.argv[1], sys.argv[2])
