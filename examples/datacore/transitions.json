@@ -1,0 +1,12 @@
+[
+  {
+    "script_to_run" : "echo",
+    "from_state": "START",
+    "to_state": "start_datacore"
+  },
+  {
+    "script_to_run" : "echo",
+    "from_state": "start_datacore",
+    "to_state": "installed_dataset"
+  }
+]

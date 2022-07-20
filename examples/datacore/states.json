@@ -1,0 +1,11 @@
+[
+  {
+  "state_name": "minimal_dataset",
+  "tests": []
+  },
+  {
+  "state_name": "start_datacore",
+  "tests": []
+  }
+
+]
