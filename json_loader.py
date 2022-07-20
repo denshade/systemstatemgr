@@ -33,10 +33,18 @@ def run(states, transitions):
 
 
 def load_and_run(state_file, transitions_file):
+    print("Loading states and transitions")
     resulting_states, resulting_transitions = load_from_file(state_file, transitions_file)
+    print("Done loading states and transitions")
+    print("Running all transitions to get an estimate of timings")
     resulting_transitions = state.populate_transitions(resulting_transitions)
+    print("Done running all transitions to get an estimate of timings")
+    print("Searching for optimal transitions")
     sorted_transitions = state.try_random_transitions(resulting_states, resulting_transitions, 100)
+    print("Done searching for optimal transitions")
+    print(f"Starting to run {sorted_transitions}")
     run(resulting_states, sorted_transitions)
+
 
 if __name__ == '__main__':
     if len(sys.argv) < 3:

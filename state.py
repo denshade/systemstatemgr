@@ -18,6 +18,12 @@ class Transition:
         self.weight = weight
         self.to_state = to_state
 
+    def __repr__(self):
+        return f"{self.from_state} -> {self.script_to_run}[{self.weight}] -> {self.to_state}"
+
+    def __str__(self):
+        return f"{self.from_state} -> {self.script_to_run}[{self.weight}] -> {self.to_state}"
+
 
 #
 # Returns the used transitions.
