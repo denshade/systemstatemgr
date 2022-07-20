@@ -47,6 +47,15 @@ class TestPlanMethods(unittest.TestCase):
         self.assertIsNotNone(random_transitions)
         self.assertEqual(10, len(random_transitions))
 
+    def test_random_tries_throws_if_nothing_found(self):
+        states_list = [State("unreachable", [])]
+        transitions = [Transition("unreachable", "n", None, 2)]
+        try:
+            try_random_transitions(states_list, transitions, 1)
+            thrown = False
+        except Exception:
+            thrown = True
+        self.assertTrue(thrown)
     def skipped_test_check_populate(self):
         transition1 = Transition(START, "init", "python3 sleep.py", 10)
         transitions = populate_transitions([transition1])

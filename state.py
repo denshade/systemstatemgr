@@ -59,7 +59,8 @@ def try_random_transitions(states_to_visit, available_transitions, nr_tries):
             print(f"{exc}")
 
         random.shuffle(states_to_visit)
-
+    if best_transitions is None:
+        raise Exception("No transitions found to cover all states")
     return best_transitions
 
 
