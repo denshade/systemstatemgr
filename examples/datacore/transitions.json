@@ -1,6 +1,6 @@
 [
   {
-    "script_to_run" : "echo",
+    "script_to_run" : "examples\\datacore\\scripts\\startdatacore.bat",
     "from_state": "START",
     "to_state": "start_datacore"
   },
